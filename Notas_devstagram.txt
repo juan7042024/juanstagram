@@ -1,0 +1,496 @@
+
+video 47: estructuras de carpetas en laravel, donde en views se se el "welcome php" donde va el contenido HTML, tambien trae la parte de las rutas donde pueden ser declaras y llamando a la vista entrando a resources/views, VENDOR donde van las dependencias, tambien se pueden instalar algunas, ejemplo una libreria sobre pagos de paypal
+"composer.json" donde se ponen las dependencias, tambien el .env donde van las variables de entorno donde va la conexion de la base de datos, al igual de endpoints al servidor ".gitignore" para que no suba ciertas carptas hacia github "vite.config.js" donde va compilar JS y CSS al igual react
+
+video 48: Routing en laravel, donde tienen el blade y se declaran las rutas, el detalle es que no hay que repetir mucho el codigo, para ello se hace un archivo que englobe el nav para ambas rutas
+
+video 49: creacion de layout principal en "resources/layout/app.blade.php para crear codigo que se repetira muchas veces y seran llamados en las rutas donde se requieran para evitar la repeticion del codigo, se usa @extends('') para llamar a otro archivo al archivo principal para evitar codigo que se repita asi con las directivas -> @extends('layouts.app') donde layouts es la carpeta separada por un punto que dirige al archivo llamado "app.blade.php" y otra directiva para los titulos h1 es el @yield('titulo') que se hace un contenedor para ser llamado a
+otros archivos de otras rutas dentro de views, donde solamente es nosotros, principal, tienda, con @section
+
+50: instalando tailwind CSS con vite con el CMD de windows "npm install -D tailwindcss@3.4.11 postcss autoprefixer" -> "npx tailwindcss init -p" que instalar 2 archivos, tailwind.config.cjs, postcss.config.cjs, tambien se instala "npm install -D postcss" para
+
+video 51: extensiones utiles para el curso, "TailwindCssIntellisense", "laravel goto view", "laravel Extra Intellisense", php Namespace Resolver" para autocompletar clases en laravel
+
+video 52: navegacion y estilos para "app.blade.php" (Añadiendo clases y estilos con tailwindcss)
+
+video 53: creando el template del registro del sistema, se declara una ruta en web.php "crear-cuenta" y se crea un folder dentro de "resources/views/auth/register.blade.php"
+
+video 54: MVC , Modelo Vista Controlador, donde se separa la logica del negocio, la vista y el controlador, donde se hace la logica del negocio, la vista es donde se muestra el contenido
+
+video 55: artisan que es un archivo donde esta alojado los comandos para interactuar con laravel, con "php artisan" para ver los comandos que soporta ejemplo "php artisan make:controller" --help (como ayuda)
+se crea asi -> "php artisan make:controller RegisterController" se recomienda poner en mayuscula el nombre del controlador y el tipo que es "Controller" se crean en "Http/controllers/RegisterController.php",
+cuando son proyectos grandes, se usa -> "php artisan make:controller Auth/RegisterController" (esto sirve en aplicaciones mas grandes,)
+
+video 56: en register.blade.php, creamos un section de contenido, donde en bootstrap, tienen grillas de 1 al 12, aqui tiene de 1/6 1/12, es decir la proporcion que usaras en la pantalla, cuando se llena un formulario se usa un metodo POST, get cuando obtienes informacion de un servidor
+
+video 57: tipo de request POST, GET, PUT, DELETE cuando los usuarios rellenan un formulario, 
+
+video 58: implementacion de seguridad para cross site request @csrf
+
+video 59: Controllers en laravel, sirve para tener un codigo mejor organizado, ademas de una mejor separacion mayor en la funcionalidad de las aplicaciones y sitios web, laravel tiene convension a la hora de nombrar los metodos
+de los controllers como ResourceControllers, esto ayuda a tener todo mejor organizado
+
+video 60: nombres de rutas y sus ventajas
+
+video 61: como leer datos de un formulario
+
+video 62: validacion de formularios, dentro de resources, metemos este repositorio de idioma asi: https://github.com/MarcoGomesr/laravel-validation-en-espanol, descargas y lo mueves dentro de "resources el foder, en "app.config" en el 'locale' => 'es'
+
+video 63: finalizando la validacion, 
+
+video 64: que son y como ejecutar las migraciones en laravel es el control de versiones de tu base de datos de esta forma de puede crear la BD de poder compartir el diseño con el equipo de trabajo, SI deseas agregar nuevas tablas o columnas a un a tabla existente, puedes
+hacerlo con una nueva migracion; SI el resultado no fue el deseado, puedes revertir la migracion, "php artisan migrate", si no te gusta la migracion, "php artisan migrate:rollback", si fueron las ultimas migraciones que hiciste que salieron mal, con "php artisan migrate:rollback --step=5"
+Agregar migraciones: "php artisan make:migration agregar_imagen_user" "php artisan", muestra todos los comandos que soporta
+
+video 65: visores de base de datos: DBeaver Community  (https://dbeaver.io/)
+
+video 66: conexion de la base de datos con DBeaver,te pide que motor de BD quieres usar, escoges Mysql pones las credenciales de la BD que tienes almacenado en las variables de entorno,(nombre de BD, usuario, password, puerto, host (localhost)), te pide instalar drivers de parte de apache, lo descargas porque lo pide el programa
+y ya puedes acceder a la base de datos dentro de DBeaver
+
+video 69: revisar por el password confirmado
+
+video 70: añadir migracion para Username
+
+video 71: crear Registros con Eloquent ORM(de laravel Object Relacional Mapper) que hace la interaccion hacia la BD de manera sencilla, en eloquent cada tabla tiene su propio modelo, donde ese modelo interactua unicamente con esa tabla y tiene las funciones necesarias para crear registro, obtenerlos,
+actualizarlos y eliminarlos (cada modelo con su tabla (similara a springboot)) para obtenerlos, actualizarlos, eliminarlos o relacionarlos, se crea con "php artisan make:model Cliente" convenciones, " Cuando creas el modelo Cliente, Eloquent asume que la tabla se va llamar clientes
+
+video 72: hecho el registro, daria un error de que el usernmae esta pero debe por temas de seguridad, debe de tenerlo en el modelo users donde se añade 'username'
+
+video 73: Hashear passwords se importa la clase de Hash -> use Illuminate\Support\Facades\Hash; para encriptar la contraseña en laravel,
+
+video 74: Almacenar El nombre de usuario de forma que pueda ser usado en la URL (uso de STR) slug para que ponga guion "-" en usuarios separados para evitar problemas con la URl
+
+Video 75: evitar Duplicacion de usuarios, en la migracion donde se añade el "username", se pone el "=>unique()", para que los usuarios no se dupliquen
+
+video 76: Redireccionar al usuario al muro, una vez su cuenta creada, en "php artisan make:controller PostController" y otro de php artisan make:controller LoginController (Para que los usuarios puedan iniciar sesion), en web.php, se hace la ruta donde ira despues de registrarse
+asi Route::get('/murto', [PostController::class, 'index'])->name('posts.idenx');
+
+video 77: autenticar un usuario que haya creado una cuenta, 
+
+video 78: protegiendo el muro, dentro de views, creamos dentro de views/dashboard.blade.php
+
+video 79: creando la vista para el login, en web.php, creamos la ruta del login tipo get lo que mostrara hacia el usuario, y el de tipo POST a lo que se enviara hacia el usuario
+
+video 80: Validacion al formulario de login, creamos una ruta tipo post para enviar los datos hacia el servidor 
+
+video 81: Revisar si las credenciales son correctas, e imprimir mensajes de error
+
+video 82: verificar si un usuario esta autenticado o no
+
+video 83: cerrar la session creamos un controlador asi "php artisan make:controller LogoutController", en web.php hacemos una route de tipo post
+
+video 84: meter boton de "cerrae sesion" dentro de un boton para evitar que algun intruso entre, se pone  en modo post ya que se enviara la peticion del cierre de sesion
+para ello se mete dentro del formulario junto a @csrf para que sea mas seguro
+
+video 85: mantener la sesion siempre abierta, en "login.blade.php"
+
+video 86: URL,s unicas para los usuarios (MURO) en el web.php se mete dentro el modelo "user" asi : Route::get('/{user }', [PostController::class, 'index'])->name('posts.index'); esto
+se llama "ROUTE MODEL VALUE" dentro del "POSTCONTROLLER" se declara dentro del index, la clase de "User"
+
+video 87: Mostrar el nombre de usuario: en PostController.php
+
+video 88: poniendo el resto de informacion, 
+
+video 89: añadiendo un enlace para crear Posts se pone el boton en "app.blade.php",
+
+video 90: pasos de template, creacion del boton de publicaciones y del formulario de crear la publicacion
+
+video 91: finalizando el formulario, es decir ponerle la descripcion y el text area
+
+video 92: solucionando el detalle de la autenticacion, eso se soluciona con poner el registerController y en el LoginController en el redirect esto :  ['user' => auth()->user()->username]
+tambien dentro de app.blade.php, se pone en el Hola: el href dentro para que redireccione a su perfil asi:  <a class="font-bold text-gray-600 text-sm" href="{{ route('posts.index', auth()->user()->username)}}">
+
+video 93: instalacion de "dropzone" instalacion asi "npm install --save dropzone", dentro de resources/js/app.js se edita y se pone en el app.blade.php dentro de head esto @vite('resources/js/app.js') para que funcione el dropzone
+
+video 94: creacion de un controlador para subir imagenes mediante dropzone con "php artisan make:controller ImagenController"  se pega este cdn "<link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />"
+en "create.blade.php" donde se mete la parte de los datos del sistema
+
+video 95: leer imagenes del request,l dentro del formulario donde se suben las imagenes, se pone la directiva @csrf para evitar ataques de seguridad y se checa que no de error en las herramientas del navegador, accediendo a "network/fetch/XHR -> response" y verificar
+que se este comunicando la vista con el backend del mensaje dd("subiendo imagen"), se comenta y se hace la funcion de subir imagenes
+
+video 96: los eventos de dropzone, de "sending", "success", "error", "removedfile", opcionalmemte se pone un console.log para ver los estados de las imagenes en el proceso del uso, donde el "response", obtiene la respuesta desde el controlador
+
+video 97: añadiendo "intervention" para procesar las imagenes, se instala asi "composer require intervention/image", en composer.JSON, se debe ver si "intervention/image": "3.11", y despues con php artisan vendor:publish --provider="Intervention\Image\Laravel\ServiceProvider"
+ se verifica importandolo asi en ImageController -> use Intervention\Image\ImageManager; si no da error es que lo reconoce
+
+ video 98: Almacenando imagenes en el servidor, en "ImagenController.php", haremos la parte de la instruccion para almacenar las imagenes
+
+video 99: creando modelo y posts para la migracion asi: "php artisan make:model Post" (el nombre en singular) al igual la tabla "migracion" asi
+"php artisan make:migration create_posts_table"
+
+video 100: añadiendo Propiedades a la migracion, en la migracion de "post", le creamos los campos de titulo, descripcion, imagen, y la relacion que tiene de usuarios donde 1 usuario puede tener muchos posts
+de ahi ejecutamos la migracion con "php artisan migrate"
+
+video 101: Factories para realizar testeos en la base de datos, en "factories/PostFactory", se hace la generacion de datos FAKE para saber el desempeño
+
+video 102: ejecutar y comprobar el factory: "con php artisan tinker" para poder llenar datos de pruebas en las publicaciones
+
+video 103: validacion de las publicaciones, en "route.php", creamos la ruta Post para "publicaciones"
+
+video 104: agregando "path" a la imagen del request en "create.blade.php", se pone el input de tipo hidden con name de "imagen", despues el mensaje de validacion de subir
+imagen obligatorio en la publicacion, despues en "app.js", se pone un queryselector para qur genere el value de la imagen que seria el ID al momenton de subir dicha imagen
+(esto se ve en inspeccionar )
+
+video 105: validar la imagen en dropzone donde si falla pero tenemos 1 imagen que subimos: en create.blade.phpm se pone el "value={{old('imagen')}}", sirve para almacenar la ultima imagen
+que se guardo
+
+video 106: almacenamiento de publicaciones, cuando subamos alguna imagen, titulo y descripcion, se genera un registro donde la imagen estaria alojado, para ello, en "PostController", se hace la logica
+por parte de post
+
+video 107: otra forma de crear registros, en PostController, se escriba la otra forma
+
+video 108: relaciones con Eloquent en LARAVEL: son metodos que existen en los modelo, donde este ultimo tiene un metodo y tipo de relacion, esto se conoce como "COLECCION", ejemplo $user->posts
+las mas importantes son "One To One", "One To Many", "Belongs To", ejemplo de relacion de 1 a 1, donde un usuario tiene 1 perfil. de "1 a muchos" donde 1 usuario tiene  muchas publicaciones
+"belongs To", es una relacion inversa, donde en vez de que "1 usuario tiene muchos Post", "ahora Muchos Post tienen a 1 usuario o autor", la que menos se usan son 
+
+"Has One of Many": donde 1 modelo
+tiene multiples modelos asociados, sirve para traer un ultimo registro de esos modelos relacionados, es decir si tienes una tienda virtual, quieres saber la ultima venta del "usuario" y la otra "ordenes",
+con eso te traes el ultimo registro de ese usuario, otro es
+
+"Has One Thought": es de 1 a 1 y añade una relacion mas, ejemplo sistema de pacientes, tendras el modelo del doctor donde el doctor puede tener multiples pacientes, donde cada paciente tiene su habitacion asociada a
+ellos
+
+"Has Many Thought": ejemplo un sistema de eventos con un calendario, donde los eventos pueden ser multiples, pero donde se llevan los eventos es en 1 solo lugar donde ese lugar tiene los asistentes que son multiples personas
+donde los multiples eventos, se centraliza(lugar intermedio) en el lugar al igual los multiples asistentes 
+
+video 109: Creando la relacion de usuarios a POST: en User.php donde se crea la funcion "posts" donde dentro ponemos "hasMany" donde es relacion de "1 a muchos(One to Many)"
+
+video 110: haciendo la relacion inversa donde "1 post tiene 1 usuario", esto en el modelo "Post.php"
+
+video 111: Almacenando del Post con una relacion en "PostController"
+
+video 112: filtrar las publicaciones del usuario, en "web.php", "PostController" y "dashboard.blade" este ultimo para ver las "n" publiaciones que tiene hecho "en PostController" hacemos pruebas con dd($user->id); lo comentamos
+hacemos las consultas que son asi $posts = Post::where('user_id', $user->id)->get(); para luego declarar dicha consulta en el "dashboard" para ser utilizado en la vista asi 'posts' => $posts
+
+video 113: mostrando las publicaciones, en "dashboard.blade", modificamos para la seccion de  donde pondremos un @foreach donde mostraremos las "N" cantidad de imagenes que tenga el usuario, tambien le damos estilos para que las
+fotos de las publicaciones se vean de buena forma
+
+video 114: Mostrar mensaje de "no Hay publicaciones" de manera condicional
+
+video 115: Paginando los registros (en este caso publiaciones), en "PostController" en la consulta creada, ponemos el "paginate" para que se pagine los registros, en "dashboard.blade" donde reemplazamos en vez de get() a ->paginate() dentro ponemos cuantas
+paginas queremos mostrar, en este caso 2 por seccion, en la vista (dashboard.blade) hacemos un div donde dentro ira un {{ $posts->links() }}
+
+video 116: añadir Tailwind en la paginacion: tailwind tiene un modo ngmod donde las clases del framework
+
+video 117: otra forma de filtrar, (aunque no es recomendable usar $user->$posts(), funciona pero no deja paginar), en cambio con la consulta $post = Post::where('user_id', $user->id)->paginate(2);, este es mejor ya que deja paginar
+los registros por seccion y permite representarlo en la vista
+
+video 118: routing Para mostrar una publicacion en laravel, en PostController, hemos visto, Index, Create y Store, faltan otras mas, en "web.php", ponemos la ruta tipo get para mostrar las fotos hacia el usuario, que es "show"
+
+video 119: mejorando la estructura de la URL donde muestre el usuario, y el id de la imagen algo asi dentro de la ruta de la aplicacion -> ('/{user:username}/posts/{post}') esto se donomina "Route model binding", donde se puede tener dos variables y 2 modelos
+diferentes, donde pide el $user para que funcione la URL dentro asi en el "dashboard.blade.php", -> tanto el $post y el $user, deben estar disponible para el template para su uso en la aplicacion, y en la funcion de "show", donde recibe los parametros de la funcion
+si importa ya que si en "web,php", puso prumero /{user:username} en la funcion de parametro, debe ir primero ese "User $user", despues el que le sigue /posts/{post} que es "Post $post"
+
+video 120: mostrando el autor y la fecha de publicacion: dentro de "show.blade.php", ya se añade para poder ver la publicacion y el autor del contenido
+
+video 121: añadiendo la caja de comentarios en "show.blade.php", se hace la seccion mencionada, se hace su seccion de poner comentarios, hacemos un form, dentro tomamos un "create.blade.php"
+
+video 122: Requerir Autenticacion para mostrar algunas paginas en "PostController.php", se pone el $this->middleware('auth'), se hace para crear URlS protegidas para validar accesos en la pagina, ejemplo si tiene sesion abierta y cambias la URL a otro navegador, te manda al login
+el permitir usuarios que tengan cuenta o no, ver las fotos de la publicaciones, el perfil, etc, en las publicacion, sale para comentar, queremos que no salga al menos que el usuario este autenticado, en "show.blade.php", ponemos una condicion en la parte de comentarios que saldra si
+el usuario esta autenticado o no, 
+
+video 123: Crear migracion, Modelo y controller de los comentarios:
+
+video 124: añadir el routing para guardar los comentarios, en web.php, se hace la  ruta de los comentarios que seria de tipo POST y GET porque se envia el comentario(POST) ya su vez nos muestra el comentario (GET), en show.blade.php, en la seccion de agregar el comentario del formulario, 
+se pone el enlace que va a redirigir para que haga la funcion donde "comentario.store, lo hara en el ComentarioController
+
+video 125: almacenando comentarios, dentro del "comentarioController.php", hacemos las acciones de validar, almacenar el resultado e imprimir el mensaje todo dentro de la funcion de STORE donde se valida el comentario, se guarda el comentario y el mensaje de sesion del comentario del exito que se envio y se crea su mensaje en el "show.blade.php"
+
+video 126: hacer la relacion de el POST para mostrar los comentarios, en "post.php", donde se hace una relacion de comentarios donde 1 usuario puede tener multiples comentarios en "show.blade.php", debajo de @endauth hacemos prueba con {{dd($post->comentarios)}} para verificar si la relacion funciono
+
+video 127: detectando si el usuario autenticado es quien creo la publicacion: en "web.php", se crea la ruta de tipo DELETE para el "show.blade.php", si el post de la persona autenticada le sale el boton de elimnar, si es otro usuario autenticado, y no es su publicacion, no le saldra dicho boton
+
+video 128: Method Spoofing en laravel: el "posts.destroy" lo metemos en el action del boton de "eliminar  y el post como method, tambien se mete igualmente dentro del form la directiva @method('DELETE') hay PUT, PATCH y DELETE
+
+video 129: añadir un policy para compropar si el usuario es quien creo la publicacion, en "PostController", se hace la logica de elimnar en la funcion de "destroy" donde ponemos la condicion que si es el usuario quien va eliminar la publicacion para que proceda, para mejorar, instalamos "php artisan make:policy PostPolicy --model=Post" y el model es para asociarlo
+esto sirve para dar ciertos roles hacia los involucrados, ejemplo una empresa de bienes, se crean los ROLES hay vendedores que No puden crear ordenes, pero los repartidores que no crear las ordenes pero si pueden ver las ordenes, es decir "a quien dar acceso a que dependiendo del rol"
+
+video 130: elimnar la imagen cuando se borra la publicacion (importante ver legislacion del pais, para saber que eliminar y que no)
+
+video 131: Para que sirven los "constrained" en las migraciones, como en la migracion de "create_posts_table.php", sale esa relacion de "contrained" en la llave foranea (user_id), se copia el cascade y se pega dentro de la migracion de "create_comentarios_table", esto sirve si borro un post, que se borren igual los comentarios quien algun usuario lo haya hecho
+
+CREACION
+video 132: Creando el modelo y la migracion se crea el "php artisan make:model --migration --controller Like"
+
+video 133: creando el boton LIKE en "Show.blade.php":
+
+video 134: Guardando el Like del usuario: en web.php se crea la ruta donde se va ir a guardar el like, en el form del boton de like, se pone como metodo POST y el action="{{route('posts.like.store', $post)}}"
+
+video 135: Revisar si un usuario ya dio Like, en show.blade.php, por fuera se pone @auth dentro el formulario del boton de like @endauth y en "post.php" verifica si dio like 1 vez 
+
+video 136: Quitar el like de una publicacion, en "show.blade.php", le ponemos un estilo a los likes que haga el usuario con fill="red" dentro de ese, se hace el boton del dislike con una condicion donde dentro se pone el dislike que se destruya donde habra un metodo que elimine el registro cuando una persona elimine su like con "destroy" en "LikeController.php"
+
+video 137: mostrar la cantidad de likes que tiene la publicacion en "show.blade.php", se hace la parte de los likes para contar los que tiene almacenado en las tablas, 
+
+video 138: mostrar enlace para editar perfil si el usuario autenticado visita su perfil, en "dashboard.blade.php", metemos directiva de @auth @endauth donde dentro va un boton de editar perfil
+
+video 139: Proteger la edicion de los perfiles, se crea un "php artisan make:controller PerfilController", creamos en web.php la ruta del perfil donde se muestra el formulario de editar el perfil y el POST para enviar esos cambios hacia la BD
+
+video 140: Porque EL ORDEN DE RUTAS ES IMPORTANTE: dentro de "views/perfil/index.blade.php", se quita en las rutas de PerfilController el {user::username}, quitamos lo que tenga que ver con "$user" en el link del lapiz de editar perfil, despues daria error un "404 NOT FOUND" al acceder aeditarlo, para solucionarlo, se hace "php artisan route:cache", esto hara limpieza
+de las rutas cache de la lista o si no te funciona el primero, escribe este "php artisan route:list" para ver las rutas de la aplicacion, tomamos las rutas de "editar-perfil", lo ponemos encima de de la ruta de /{user:username} para que asi detecte la ruta de "editar-perfil"
+en web.php
+
+video 141: Creando un formulario para que pueda editar su perfil, en "index.blade.php"
+
+video 142: validando el formulario: en Perfilcontroller.php se pone la funcion de "store", donde dentro se va meter validaciones sobre actualizar sus datos del usuario en su perfil
+
+video 143: Almacenar Informacion del usuario, "PerfilController" en la funcion de "store" del controlador, ahi se ponen validacion de usuario, condicional de que si el usuario cambia de imagen de perfil, y despues el guardado de datos hacia la Base de datos
+
+video 144: Crear la migracion para añadir imagenes al perfil de usuario, se crea una migracion asi "php artisan make:migration add-imagen_field_to_users_table" y con ello detecta "users" y se añade dentro de la tabla el campo "imagen" en users gracias a las convenciones de laravel, 
+
+video 145: Mostrar la nueva imagen del usuario, en "dashboard.blade.php" dentro de la imagen cambiamos hacia {{ asset('perfiles')}} concatenado con alguna imagen para que se pueda mostrar la imagen del usuario de su perfil, tambien se hace una condicion de que si el usuario tiene alguna
+imagen, se muestra la imagen, si no, se muestra una imagen por defecto de icono de usuario
+
+video 146: Mostrar la cantidad de POST del usuario que ha posteado, en "dashboard.blade.php", se pone donde va el numero de post esta consulta {{ $user->posts->count() }} esto traera los post que tenga el usuario
+
+video 147: creando la migracion, modelo y controlador, (Seguir y seguido) asi "php artisan make:model -mc Follower" "-mc" es model y controller y en web.php, hacemos sus rutas del que oprime de "seguir usuario" tipo get y post, en la migracion hacer la relacion de muchos user_id pueden seguir a "users"
+
+video 148: Crear e formulario dentro un boton de seguir usuario y dejar de seguir, en "dashboard.blade.php",
+
+video 149: Creando la relacion para seguir a un usuario, en "FollowerController.php", se hace una funcion "store para que almacene un registro, despues donde se pasa de parametro $user y el $request donde se enviara la peticion, en "dashboard.blade.php", se ponen la ruta hacia donde van hacer dicha funcion,
+
+video 150: Dejar de seguir a un usuario: en "dashboard.blade.php" se copia la ruta que la de seguir pero es de dejar de seguir es similar al de seguir, solo que la diferencia es otro nombre a "destroy" y el resto de funciones es lo mismo, lo que cambia es que se pone como detach 
+
+video 151: mostrar los formulario de forma condicional de que si sigues un usuario, desaparezca el boton y salda el de Dejar de seguir, en USER.php 
+
+video 152: Añadir strings para mostrar la cantidad de seguidores correctamente, en "dashboard.blade.php" se pone asi $user->followers->count() y despues una directiva de @choice para que si es 1 valor se ponga "Seguidor", si son 2 o mas es "Seguidores"
+
+video 153: mostrar los que sigue el perfil, en "user.php", hacemos lo inverso de seguir, recopilar los usuarios que nos siguen
+
+video 154: Creando la pagina principal, creamos un controlador llamado "HomeController" asi "php artisan make:controller HomeController" y dentro se hace un metodo de __invoque para que sea rapido de invocarse dentro de "web.php" asi Route::get('/', HomeController::class)->name('home'); Manda a llamar el contenido que esta dentro del controlador,
+el contenido de "principal.blade.php" se migra hacia "home.blade.php"
+
+video 155: obtener los usuarios que seguimos: en "homeController.php" hacemos la funcion de obtener 
+
+video 156: obtener los Posts de los usuarios que seguimos
+
+video 157: Mostrar los Posts que seguimos en devstagram, en "homeController.php", donde una condicion que si los que sigue tienen publicaciones, despues un foreach para recorrer los valores de dichas publicaciones, despues
+
+video 158: Revisando para que filtre las ultimas publicaciones de los usuarios que siguen se muestren de primero con poner "latest" en las publicaciones en donde recorre la consulta el @foreach, igual en PostController para que de igual forma asi la filtre, corregir para que los demas usuarios no autenticados, tambien puedan ver las publicaciones de los usuarios que siguen
+esto se hace con un constructor en "HomeController.php"
+
+video 159: crear componente en laravel y utilizarlo, asi se crean "php artisan makecomponent ListarPost (Crea el componente) y se crea el "Http/Controllers/view/Components/ListarPost.php y el "views/components/listar-post.blade.php" para usarlo, se mete el contenido en "home.blade.php" y se pone dentro del componente .blade y se pone <x-listar-post/> donde "x" es un componente
+
+video 160: que son los $slots en los componentes <x-listar-post> <h1>Mostrando post desde</h1> <x-listar-post/> y lo $slots se pueden reutilizar cambiandole los valores como variables donde <x-slot:titulo><header>esto es un header</header></x-slot:titulo> y en el controlador se declara la vista para poder usar el componente, en "homeController.php"
+
+video 161: Que es livewire, que es y que problemas soluciona, Es un framework Full Stack para laravel, soluciona el problema de interacciones y realizar sitios web dinamicos de forma sencilla, Es una mezcla de cliente servidor, soporta "Validacion de forms", Subir archivos, paginacion, redireccionar, mensajes flash, autorizacion, eventos, se instala asi "composer require livewire/livewire"
+
+video 162: creacion de componentes en livewire, si escribimos "php artisan", saldra un bloque de codigo donde esta alojado livewire, para crear el componente asi "php artisan make:livewire like-post", dentro de "http/livewire/LikePost.php" que es donde va mostrar la vista y donde se hara la logica y la vista en "resources/views/livewire/like-post.blade.php", en la vista siempre hayb que retornar un "div"
+para mostrar un componente en otras vistas, es asi en este caso en "show.blade.php" con poner <livewire:like-post />, es preferible pone una extension de livewire para que lo reconozca al escribir
+
+
+video 172: explicacion de breeze que es una base para empezar el desarrollo
+
+video 173: instalando breeze en este caso en laravel 10 el minimo es para que funcione es este:  composer require laravel/breeze:"1.20.2" --dev y su pagina de versiones de breeze   https://packagist.org/packages/laravel/breeze#v1.20.2, si da error el mas comun es reneombrar a "postcss.config.js" a "post.config.cjs", despues declarar la ruta dentro de "vite.config.js" despues se instala asi de manera optima 
+"php artisan breeze:install" escoges 0 = blade, no y no, y automaticamente de instala el "node_modules", despue hacer php artisan serve y "npm run dev", verificar nuevo comandos con "php artisan" list", despues "php artisan route:list", sirve para ver las peticiones de los componentes de laravel breeze, despues hacemos un "php artisan migrate"
+
+video 174: identificando vistas, rutas, componentes de breeze, en "welcome.blade.php", se le quita los estilos por defecto para darle uno propio, al igual el cotenido del body, tambien el uso de los compomentes en laravel que empiezan con <x-application-logo class="">, el componente "application-logo.blade.php", se le cambia y se pone otro renombrandolo a "DevJobs", para ver las rutas de breeze en "routes/auth.php" si quiero quitar los estilos de fuentes
+con solamente entrar al archivo de "Tailwind.config.js", ahi es donde se quita la parte de "themes"
+
+video 175: cambiando los mensajes de error a español, en ele github, https://github.com/MarcoGomesr/laravel-validation-en-espanol, se hace la parte de la validacion en español de los texto de breeze y mensajes de error en laravel dentro del proyecto poniendo este comando: git clone https://github.com/MarcoGomesr/laravel-validation-en-espanol.git lang, debe estar dentro de "resources/lang", nos vamos a "config/app.php", dentro cambiamos "locale" a "es", en login.blade.php", pasamos los errores de validacion de laravel
+y no las del html poniendo en el "form" "novalidate" y el componente dentro del login de "input-error.blade.php", le damos estilos para que muestre de mejor manera los errores con las clases de tailwind
+
+video 176: Mofificando el "login": crear cun componente de "Forgot your password", para poder reutilizar el componente en otros archivos.blade, se crea asi "php artisan make:component Link" donde en "resurces/views/components/link.blade.php" y en "app/View/components/Link.php" (este ultimo no se requiere), movemos el link de "forgot your password" al componente de "link.blade.php" dentro creamos un @php @endphp una variables llamado $classes dentro iran los estilos del mensajes, aparte en <a></a> se declara a lado de "a" los $attributes->merge(['class'=>$classes])
+donde se llamo el valor de la variable y en el login.blade.php, se hace <x-link :href="route('register')">Crear cuenta</x-link>  <x-link :href="route('password.request')">Olvido contraseña</x-link>, para reutilizar el componente de manera dinamica solo llamando las rutas en base a "auth.php", si quiero renombrar en attributes "href" a enlaces seria asi 'href'=>$enlace y en login en el componente de <x-link :href=""></x-link> seria a :enlace
+
+video 177: Finalizando el Login, cambiar ciertos tetos a español como el componente de <x-primary-button class="w-full justify-center">, donde se pone dentro el inicio de sesion con esas clases para que el usuario tenga facil el oprimir el boton y el texto centrado con tailwind y dentro el texto ponerlo en español como "Iniciar Sesion"
+
+video 178: Personalizando la vista del registro, en register.blade.php, de manera muy simular al login, le daremos los estilos al registro, dentro del form se pone el "novalidate", para que te de los errores de laravel y no del HTML, tambien poner los texto en español como el "nombre", "email", etc
+
+video 179: Personalizando la vista de "Olvide mi contraseña", en "forgot-password.blade.php", muy similar al de login, solo que los enlaces de Crear cuenta y de "Iniciar sesion", se cambian las rutas para que coincidan que estan en "auth.php", tambien cambiar los estilos de los textos en "input-label.blade.php"
+
+video 180: forzar al usuario a confirmar su cuenta para autenticarse, hacemos una cuenta para las pruebas, ahora para lograr autenticarse mediante el correo al creae la cuenta, asi se hace, en "web.php", trae middleware, que si se crea una cuenta y esa sesion se copia la URL y se manda a otra pagina, pedira iniciar sesion, en "routes/web.php" en middleware, se pone a lado "verified" para que sirva de auntenticacion, al inicio de la sesion, para ello en el modelo "User.php" en la class User se pone el // se pone el " impelements MustVerifyEmail", recargamos la pagina,
+se ve que requiere enviar email para la verificacion, para asegurarnos de que envie algo en ".env" (checar el detalle verificar cuenta con el correo)
+
+video 181: personalizando la pagina de "confirmar cuenta" en "verify-email.blade.php", se cambia el texto de la verificacion
+
+video 182: Personalizar email que se envia en "app/providers/AuthServiceProvider.php hacemos una funcion para darle estilo a los mensajes 
+
+video 183: añadiendo un Rol al formulario de registro: eliminamos los registros de ejemplo de la BD, para asignar roles, en "register.blade.php" copiamos el email address 2 veces y hacemos un selecto donde el id es rol junto al name "rol", tambien tomamos las clases del componente "text-input", despues metemos "option" donde 1 es para buscador del empleo, 2 el reclutador de empleadores, para hacerlo funcional en "routes/auth.php", en la seccion de register, dentro del controlador del RegisteredUserController haremos la funcion de los roles
+
+video 184: ejecutar la migracion del rol y guardar la informacion, para ello con "php artisan make:migration add_rol_to_users_table" y despues "php artisan migrate", para que se agrega el campo rol en el Modelo "users" y el en modelo poner "rol" y "web.php", se ven las ruta del dashboard, su html para personalizarlo
+
+video 185: Moviendo el dashboard hacia los vacantes, para el dashboard, creamos el controlador del dashboard asi "php artisan make:controller VacanteController -r" para que sea un "resource controller" con funciones de "create", "store", "show", "index" etc, despues creamos el modelo de "php artisan make:model Vacante", "php artisan make:migration create_vacante_table --create=vacantes" en "web.php", se le pasa el "VacanteController::class", tambien se le puede hacer su vista en "views/vacantes/" y dentro "index.blade.php" , copiamos lo del "dashboard.blade.php", pegamos dentro de "index.blade.php" lo
+que contenia el "dashboard"
+
+video 186: modificando el layout principal, en "index.blade.php", modificamos el layout del dashboard a cuerdo a nuestra necesidades, tambien se hara el uso de los recursos de los componentes que tenga y adaptarlo al dashboard, en "web.php", se cambia a vacantes.index dentro del "name" y cambiar todo referente a "dasboard" a "vacantes.index",
+
+video 187: Primeros pasos crear el formulario de crear la vacante, copiamos lo de "index.blade.php", despues dentro del folder "vacantes", se crea el archivo de "create.blade.php", en "web.php", duplicamos la ruta para el "create.blade.php" y en "navigate.blade.php", se crea una ruta mas de crear la vacante con "vacantes.create", tanto en modo escritorio y responsivo
+
+video 188: instalando livewire para el formulario, dentro de la raiz del proyecto, se pone este CMD "composer require livewire/livewire:^2.11.0", ver la version asi "composer show livewire/livewire", en "app.blade.php" dentro del head se declara "@livewireStyles" y antes del body "@livewireScripts", creamos un componente asi "php artisan make:livewire CrearVacante", le decimo "no"
+nos crea el "app/Livewire/CrearVacante.php y resources/views/livewire/crear-vacante.blade.php" y en el blade del de crear vacante, ponemos un texto y en "create.blade.php", llamamos el componente asi, <livewire:crear-vacante />
+
+video 189: añadiendo los campos en el componente de livewire "crear-vacante.blade.php", reutilizamos campos de email de "login.blade.php" en el componente ya que livewire si lo permite, persalizamos el campo de "titulo", otro de campo de "salario mensual, con el tipo "select", con los estilos al del input tipo text, igual select para "categoria", "empresa" tipo text, "ultimo dia para postulacion"
+de tipo "date", con los estilos de los campos mencionados, al igual la descripcion del puesto que es un "textarea" igual con los estilo de los demas input, y otro de tipo "file" quitandole el placeholder y el old para evitar problemas de compatibilidad, y de ultimo el componente <x-button-primary>crear vacante</x-button-primary>
+
+video 190: Seeding a la base de datos para crear los salarios, creamos un seeder asi "php artisan make:seeder SalarioSeeder" se busca en "database/seeders/SalarioSeeder.php", copiamos y pegamos el contenido de "https://gist.github.com/codigoconjuan/080cfbf26cadc96d2a4a043d69bb2da7" reemplazamos el seeder que creamos hacia el archivo de "SalarioSeeder.php", despues creamos una migracion asi 
+"php artisan make:migration create_salarios_table", dentro de la migracion creamos el campo de salario, creamos la tabla de la migracion con "php artisan migrate", despues ejecutamos el Seeder para que meta datos dentro de la tabla, para los "select" asi "php artisan db:seed", no genera nada, para solucionarlo, dentro del folder de seeders, hay un "DatabaseSeeder.php" a el hay que declararle el seeder que hicimos
+asi dentro del public function run() { $this->call(SalarioSeeder::class); } y ejecutamos de nuevo el comando "php artisan db:seed" para que se ejecute el seeder y se genere los datos en la tabla de "salarios"
+
+video 191: mostrando los salarios del seeder en el formulario, en "http/Livewire/CrearVacante.php" para traer los valores del seeder hacia la vista, esto es muy similara a un controlador, creamos un modelo del salario asi "php artisan make:model Salario", en el "CrearVacante.php", hacemos las funciones dentro del public function render para traer valores hacia la vista, donde solamente con traer con una 
+consulta de base de datos, con eso se llama hacia la vista para luego ser usado en el archivo de "crear-vacante.blade.php"
+
+video 192: Creando seeding de las categorias y mostrando el formulario, con seeder "php artisan make:seeder CategoriasSeeder", entrando en el github "https://gist.github.com/codigoconjuan/0ffec792888b627c67a2abfb5316a261", copiamos todo y lo pegamos dentro del seeder que creamos apenas, declaramos el seeder en "DatabaseSeeder.php", despues con "php artisan make:migration create_categorias_table" "el seeder debe coincidir con el nombre de la tabla
+"categorias y categoria" a la migracion que creamos para poder poner el campo dentro de la migracion, para evitar duplicacion de datos de los seeder dentro de la tabla de "categorias", se hace un "php artisan migrate:rollback", si haces otro rollback, se deshace una accion antes en la tabla de registro de "migrations", una vez que el registro de "migrations", se ubique antes del primer seeder que creaste, que fue el de sueldo de la vacante, 
+en ese punto se hace el "php artisan migrate" para meter los antiguas tablas donde va seeders y las nuevas, despues se escribe "php artisan db:seed" que en este caso aplique los 2 seeders, el de seleccionar el sueldo y el de categorias eso sirve ya que es un control de versiones, despues hacemos un modelo asi "php artisan make:model Categoria" y en el componente de "crearCategoria.php", mandamos a llamar los datos de la BD para poderse mostrar hacia la vista
+en el blade de "crear-vacante.blade.php" donde ponemos un @foreach similar al de salario mensual, solo cambiando la variable a $categorria $categorias,
+
+video 193: conectar el formulario a livewire, el componente y su blade de "crear-vacante", en el "CrearVacante.php", haremos funciones de $titulo, en la vista en vez de "name="titulo" se escribira asi "wire:model="titulo" ", con ello se comunica directo al backend, y asi el resto de los campos del formulario, al enviar no manda mensajes de validacion.
+
+video 194: validando el formulario con livewire, en el <form wire:submit.prevent='crearVacante'></form> donde en "CrearVacante.php", hacemos la funcion de "crearVacante"
+
+video 195: Creando un componente de livewire de mostrar error, en "php artisan make:livewire MostrarAlerta", en el "crear-vacante.blade.php", declaramos el @error('titulo') que es el "wire:model="titulo" ", dentro del error ponemos <livewire:mostrar-alerta :mensaje="$message" /> donde se le pasa el mensaje de error, se declara en "CrearVacante.php" donde se declara la variable public $message; 
+
+video 196: Añadiendo el resto de los mensajes al error: en "crear-vacante.blade.php", ponemos el @error('salario_mensual') y el @error('categoria') asi a cada campo, esos errores son dinamicos, es decir que si acompletas el campo, pero lo envias, se quita el error y permanecen los que no han sido rellenados, eso ayuda a no resetear los datos al momento de enviarlos, 
+
+video 197: corregir detalle de subida de imagenes con livewire, en "CrearVacante.php", se declara la variable public $imagen; y aparte habilitarlo, asi "use WithFileUploads", despues en la funcion de validacion, dejamos asi 'imagen' => 'required|image|max:1024', que es solo imagenes que se acepta y maximo 1 mega (1024kb) y poner dentro del input el "accept="image/*", para que solo admita todos los formatos de image, lo que desabilita los demas formatos diferente a imagenes,
+
+video 198: mostrar la imagen en la preview, en el crear-vacante.blade.php, abajo del input de tipo file, donde el "wire:model", se envia datos al servidor, pero tienes una respuesta al frontend, y hacemos un div para dentro mostrar la vista previa de la imagen, despues se hace una condicion de que si existe la imagen, entra a la condicion, y hace dentro asi para una vista previa, <img src="{{ $imagen->temporaryUrl() }}" alt="">
+
+video 199: problema con la migracion de vacantes, cuando agreges un campo en los archivos de migraciones, no hagas "php artisan migrate", haz "php artisan migrate:rollback", para luego ya hacer "php artisan migrate", da error cuando lo ejecutamos,  debido a las fechas que tiene,
+
+video 200: que hacer cuando tienes problemas con las migraciones, opcion_1, exceptuando que este en la tabla de "migrations" en la BD "add_rol_to_users_table", el resto sigue igual si tienes mas de eso, hay que hacer un "php artisan migrate:rollback" (y en la BD, si es dable eliminamos la tabla de vacantes), en la migracion de vacantes la dejamos como estaba cuando se creo, y con "php artisan migrate" y para llenar los datos de las tablas seed asi, "php artisan db:seed", despues 
+creamos una nueva migracion asociada a la tabla de "vacantes", asi "php artisan make:migration: add_columns_to_vacantes_table" siguiendo las convenciones de laravel que lo va reconocer de manera automatica dicha migracion, dentro de esa migracion, ponemos el resto de campos y relaciones, que se van asociar a la tabla de "vacantes" y los campos, y abajo el down para eliminar, se pone asi los campos $table->dropColumn(['titulo', 'salario_id', 'categoria_id', 'empresa', 'ultimo_dia', 'descripcion', 'imagen', 'publicado', 'user_id']);
+"despues el php artisan migrate"
+
+video 201: que hacer cuando tienes problemas con las migraciones, opcion_2, cuando hacemos un "php artisan migate:rollback, da error, para solucionarlo, hay que saber el nombre de las llaves foraneas, en dbeaver, en databses, hay un folder llamado "tables", dentro escoge la tabla "vacantes" abres y saldra "Foreign_Keys", abrimos y saldran las relaciones y nombre de las llaves foraneas, en la migracion de vacantes de "add_columns_to_vacantes_table en down, ponemos el nombre de las llaves foraneas en caso de eliminar dichas migraciones
+asi: $table->dropForeign('vacantes_salario_id_foreign'); (asi con el resto de las llaves foraneas de la tabla de "vacantes), despues hacemos un "php artisan:rollback sin errores, 
+
+video 202: almacenando imagen, en "CrearVacante.php", en la funcion de "crearVacante, hacemos la funcion de almacenar la imagen, y hacemos un replace de reemplazar la ruta de la imagen y que coincida con lo que hay en el nombre de la imagen y que se guarde en la base de datos,
+
+video 203: Almacenando la vacante, ponemos la seccion de Vacante::create, dentro iran los campos que guardaran datos hacia la BD, ponemos $datos junto a las validaciones para evitar guardados de inyeccion por seguridad, 
+
+video 204: redireccionar al usuario y crear un mensaje de session, despues la redireccion, en la vista de "index.blade.php" mostraremos el mensaje de confirmacion de que se creo una vacante,
+
+video 205: Mostrar vacantes creadas por el reclutador con livewire se crea componentre "php artisan make:livewire MostrarVacantes", en "resources/views/livewire/mostrar-vacantes.blade.php y luego en index.blade.php, hacemos que el texto de "mostrar vacantes", se migre hacia "mostrar-vacantes.blade.php", despues mostramos como componente ahi para mostrar el contenido de las vacantes, en index.blade.php asi "<livewire:mostrar-vacantes>", en su controlador del componente de "MostrarVacantes.php", hacemos una consulta de las vacantes que se
+van a mostrar asi: $vacantes = Vacante::where('user_id', auth()->user()->id)->paginate(10); , despues declaramos la variable de la consulta hacia la vista asi,  " 'vacantes' => $vacantes " en la vista se hace un foreach para iterar los registros hacia la vista de los usuarios del ejemplo que se da de ejemplo, 
+
+video 206: creando los botones para la administracion, se pone mas sobre la vacante como un <a>{{$vacante->empresa}}</a> con la fecha <p>Ultimo dia: {{$vacante->ultimo_dia->format('d/m/Y')}} "Y" va en mayuscula </p> da un error, para solucionarlo, se solucina en el modelo de "Vacante.php", se declara protected $casts = ['ultimo_dia' => 'datetime',]; y se solucionaria el error, despues hacemos otro div abajo con a para darle estilos de botones de "candidatos", editar de color azul, y de eliminar de color rojo, tambien se ponen mas estilos para que sea responsivo a moviles
+para un mejor acomodo de los botones, 
+
+video 207: finalizando el listado de los vacantes, en vez de un @forreach() @endforeach, se pone un @forelse que es una combinacion de foreach y else, ya que trabajo de que si no hay vacantes, hace algo, que en este caso fabricamos un aviso de que el usuario no tiene vacantes, esto se hace en el componente de "mostrar-vacantes.blade.php"
+
+video 208: añadiendo la paginacion, en "mostrar-vacantes.blade.php", hasta el final se pone unos botones de navegacion hacia los vacantes asi dentro del div "{{ $vacantes->links()}}", para modificar los textos de la paginacion y pasarlo a español se publica los .blade del boton para poder editarlos, se hace asi, "php artisan vendor:publish --tag=laravel-pagination" y en "resources/views/vendor/tailwind.blade.php" donde cambiamos de idioma los texto que indica la paginacion
+
+video 209: Routing y router model binding hacia editar vacante, wn "web.php" duplicamos la ruta de la vacante, de tipo Get solo que es para editar la vacante, nos sercioramos declarando en el controlador "VacanteController" de edit de la vacante, el id que debe ser correcto al momento de editar alguna vacante declarando el modelo en edit como Vacante $vacantes y dentro poniendo un dd($vacantes) y en la vista ver si muestra los datos, para que funcione, en la url debe salir algo asi /vacantes/4/edit y dentro los datos que traiga dd,
+despues se crea en "resources/views/vacantes/edit.blade.php", copiamos la base de "create.blade.php", y en el controlador de VacanteController, se declara la vista con el return view solo que con el componente de editar y la variable 'vacante' => $vacante para ser usado en la vista editar-vacante de ultimi en el boton de "editar, se escribe le ruta asi para acceder href="{{route('vacantes.edit', $vacante->id)}}, 
+
+video 210: creando el componente de livewire de "editar-vacante" asi "php artisan make:livewire EditarVacante", donde crea la clase y la vista, en "edit.blade.php", se declara el componente de livewire de la vacante que vas a usar asi <livewire:editar-vacante/>, despues, en la vista da errores de parte del salario y $categorias en "http/livewire/CrearVacante.php", copiamos los valores dentro de render para "EditarVacante.php" sobre los modelos de "categoria y de "salario"
+
+video 211: el Metodo Mount de Livewire en "edit.blade.php", se le pasa dentro del componente asi, <livewire:editar-vacante :vacante="$vacante"/>, para mostrar los valores dentro de los input de "editar-vacante", en "EditarVacante.php" 
+
+video 212: llenando el formulario con la informacion de la vacante para editar, en "EditarVacante.php" se ponen el resto de los public al igual la variables dentro del ciclo de vida de "mount" darle formato a la fecha con carbon/illuminate, despues se muestra la imagen asi dentro de un div que creamos "<img src="{{ asset('storage/vacantes/' . $imagen) }}" alt="{{ 'Imagen Vacante ' . $titulo}}">", para hacer un link simbolico (para mostrar la imagen), asi se hace, "php artisan storage:link" y deberia de mostrarse la imagen, despues cambiar el boton a "guardar cambios"
+
+video 213: Ajustando el componente para la edicion, en "EditarVacante.php", se hace una funcion de "editarVacante", cambiar en el form de "editar-vacante.blade.php" a en su wire:prevent a "editarVacante()", metemos las validaciones que se hicieron anteriormente, de manera similar para los campos que es el $rules y dentro de la funcion de "editarVacante" se pone dentro "$datos = $this->validate();"
+
+video 214: guardando los cambios de Editando la vacante, dentro de la funcion de "editarVacante", existe la imagen", "Encontrar la vacante a editar", "asignar los valores", "guardar la vacante", "redireccionar"
+
+video 215: detectando si la imagen se esta reemplazando, en "EditarVacante.php", ponemos otra variable asi "public $imagen_nueva", abajo se pone use "WithFileUploads;", en la validacion de 'imagen_nueva', la ponemos de manera similar al de "imagen" de "CrearVacante.php", en su vista de "editar-vacante.blade.php", ponemos el de "wire:model="imagen_nueva"", en editar cuando cambiemos la imagen "deberia de mostrar la nueva imagen, para ello descomentamos la parte donde muestra la previa de la imagen, renombramos a "imagen_nueva" y hacemos de manera simuilar al de "almacenamiento de la imagen de "crearVacante.php"
+ahora en el contenido de $imagen_nueva se almacenara en $imagen para luego guardarlo hacia la base de datos, ahora hay que arreglan la edicion ya que si copias la URL y la envias por otro lado, muestra la parte de que se puede editar, hayq que corregir por seguridad, 
+
+video 216: añadiendo policy de edicion, en cmd ponemos "php artisan make:policy VacantePolicy --model=vacante" nos vamos a "app/Policies/VacantePolicy.php", trabajaremos la parte de "update", donde haremos una condicion de si el "usuario autenticado" con Id es igual al usuario con su "vacante_id" asi "return $user->id === $vacante->user_id;", en "VacanteController.php" escribimos "$this->authorize('update', $vacante);" update es la accion de actualizar la pagina, cuando copias la URl y la pegas en otro navegador, te manda al login para inicio de sesion, 
+
+video 217: añadiendo SweetAlert P2, en "vacantesController.blade.php", quitamos las funciones de "destroy", "update", "store", nos vamos a "https://sweetalert2.github.io/", para importarlo con usar la CDN que es este "<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>" en "mostrar-vacante.blade.php", identamos todo el contenido dentro de un div, en "app.blade.php" ponemos @stack('styles') dentro del header y @stack('scripts') en "mostrar-vacantes.blade.php" ponemos "@push('scripts')  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> @endpush", esto permite inyectar codigo JS dentro de livewire
+en ese caso el CDN de "SweetAlert2", recargamos y sale en automatico, para ello hay que programarlo
+
+video 218: Eventos en "livewire", hacer que cuando oprimamos "eliminar", salga la ventana de livewire, al eliminar, se borre el registro de la base de datos, el boton de eliminar de "mostrar-vacantes.blade.php" lo cambiamos a "button" ponemos el wire:click="$emit('prueba'), {{ $vacante->id }}" es el que emite el evento que hara algo al momento de ser oprimido, y en en donde su php "MostrarVacantes.php" se pone la "funcion public  prueba($vacante_id){ dd($vacante_id); }" donde se le pasa el id para que se borre por ID en la funcion de MostrarVacantes dentro de la funcion de "prueba" pasandole de parametro "$vacante_id" otra forma es quitar lo anterior
+ livewire en "mostrar-vacante.blade.php", dentro del <script> Livewire.on('prueba', function)</script>
+
+video 219: Emitir eventos desde la vista hasta el componente y eliminar, el sweetalert2 el mensaje, se mete dentro del "livewire.on('mostrarAlerta', vacanteId =>{}), dentro de la condicion de if(result.isConfirmed) eliminar la vacante dentro ponemos livewire.emit('eliminarVacante') y en "MostrarVacante.php" hacemos la funcion de "eliminarVacante" hay otra forma pasandole 
+
+video 220: creando la ruta y pasando la informacion, en "web.php, copiamos la ruta que se parece, despues la modificamos asi: Route::get('/vacantes/{vacante}', [VacanteController::class, 'show'])->name('vacantes.show'); donde quitamos el middleware, ya que todos podran verlo, en el controlador se le pasa el modelo "Vacantes $vacante" dentro de parametro del "show", ya que va mostrar los datos y se crea la vista dentro del folder de vacantes asi "resources/views/vacantes/show.blade.php", copiamos el contenido de "edit.blade.php" y quitamos el componente del que copiamos, en "mostrar-vacante.blade.php" en la vacante titulo dentro de su href="{{ route('vacantes.show', $vacante->id)}}" donde se manda a llamar a la vista y mostramos el id 
+porque en el return view declaramos la variable 'vacante'=> $vacante y aunado la ruta de get que se debe acompletar con el id que lo tiene asi en "web.php", 'vacantes/{vacante}', cuando copiamos la URl hacia el otro navegador sin el middleware da error para ello ser ponen ciertas condiciones para que no salga dicho error
+
+video 221: mostrando la informacion de la vacante, creamos componente livewire: "php artisan make:livewire MostrarVacante", en "show.blade.php", se manda a llamar a la vacante que se creo asi, "<livewire:mostrar-vacante :vacante="$vacante"/>"donde se le pasa la variable $vacante del modelo "Vacantes" y en su clase "MostrarVacante.php" hay que definir la vacante asi "public $vacante", en la vista "mostrar-vacante.blade.php",  pones un mensaje para asegurar que pase hacia el componente en "mostrar-vacante.blade.php", despues mostramos los datos hacia la vista con $vacante->salario dependiendo de lo que se quiera pasar, tambien se arreglaran los datos incorrectos que muestra por el tema de las relaciones
+
+video 222: Creando relaciones de "categoria" y "salario" para mostrar sus verdaderos valores, hacer que la relacion que tanto salario y categoria pertenecen a otra columna y que se traigan los valores, abrimos el modelo de "vacante.php" ya creando la funcion de "categoria" que espera a "categoria_id" mediante belongsTo, que se dirige hacia el modelo donde en "mostrar-vacante.blade.php"
+mostrar asi $vacante->categoria->categoria donde la primera categoria es de la funcion de la relacion que declaramos en el modelo, y la segunda categoria es el contenido del campo de "categoria" que se va mostrar hacia la vista, y de manera similar al de salario "$vacante->salario->salario"
+
+video 223: Mostrando la imagen y descripcion del trabajo, en "mostrar-vacante.blade.php" hacemos mas div para mostrar de manera correcta la vacante y la descripcion
+
+video 224: solucionado Detalles en el layout principal, sobre los enlaces de middleware, para ello en "navigation.blade.php", ponemos la directiva de @auth @endauth para que en los botones de "Mis vacantes" y "crear vacante" solo lo vean usuarios autenticados, al igual los componente de mostrar el contenido al dar click del registro creado, "navigation.blade.php" se copia los botones junto al Auth de "Mis Vacantes" y de "crear Vacante" se reemplaza de @auth a @guest @endguest, dentro los botones para que los usuarios "No" autenticados, no tengan dichos accesos, la route cambiamos hacia route('login') y el segundo boton a register, ya que ese lo registro breeze en "auth.php", en el menu de hamburguesa, hay que mostrar los botones similar al de
+@auth que te muestra los botones de las acciones, lo mismo con @guest @endguest donde se mete el "login y el "Registrarse"
+
+video 225: Mostrando el mensaje al usuario de crear cuenta si desea aplicar a la vacante, en "mostrar-vacante.blade.php", poner el enlace de que te pide crear una cuenta, y va dentro de un @guest @endguest, tambien en el registro condicionar los accesos de si son reclutadores o developers si son developers, mostrara un formulario donde va enviar sus documentos, si es un reclutador NO le saldra dicho formulario
+
+video 226: Ocultar el acceso a Devs Para listar vacantes, en la migracion de "add_rol_to_users_table" donde declaramos el rol, donde 1 es dev y 2 es reclutador, hay que quitar el boton de "crear vacantes" hacia el rol de modo dev (1), para ello nos vamos hacia el controlador de "VacanteController.php", y en "VacantePolicy" en la funcion de viewAny donde determina si un usuario puede ver el modelo o no y en "VacanteController.php" se pone esto dentro de la funcion de "index": "$this->authorize('viewAny', Vacante::class); // se pasa la funcion de "viewAny" que maneja los roles de modo "dev=1" o "modo reclutador=2" y poniendole el modelo que previene al acceso total de dicho modelo "Vacante::class" arreglar si pongo en le url "http://localhost:8000/vacantes/create"
+que muestra el formulario y no debe mostrarlo aun teniendo activo los roles en "VacantePolicy.php"
+
+video 227: ocultar Acceso a Devs para crear vacantes aun teniendo programado el "vacantePolicy.php", que es este url que da el acceso, "http://localhost:8000/vacantes/create", para ello, en "VacantesPolicy" nos vamos a la funcion de "create"  ponemos dentro el rol 2: return $user->rol == 2; y en el controlador la funcion de create hay que llamarlo de manera simular al de "index"
+
+video 228: Crear el componente de Postularse a la vacante, hacer "php artisan make:livewire PostularVacante" en "postular-vacante.blade.php" ponemos un mensaje, en "mostrar-vacante.blade.php", declaramos el componente para ver si se muestra el valor de la vacante asi <livewire:postular-vacante /> solo debemos poner que el "dev" puede postular a la vacante con el formulario, pero no el reclutador de la vacante, para ello se pone asi pasandole las funciones del policy pasandole el modelo "Vacante:class" @can('create', App\Models\Vacante:class) este es un reclutador @else "este es un dev" @endcan y este el @cannot('create', App\Models\Vacante:class)  aqui va el formulario del DEV @endcannot donde es mas corto sin el uso del else, donde en el create pasandole el modelo,
+los reclutadores NO puede postular a vacantes, pero si los devs
+
+video 229: Añadir HTML en el componente, en "postular-vacante.blade.php", hacemos el formulario pasandolole los componente de <x-input-label /> <x-text-input />
+
+video 230: creando la migracion de los candidatos asi "php artisan make:migration create_candidatos_table" y el controlador "php artisan make:controller CandidatoController --model=Candidato" le pones "Y" para que cree el modelo junto al controlador, en la migracion de los candidatos, ponemos campos y llaves foraneas para que funcione y en l vista de "postular-vacante.blade.php" se pone un boton de los que trae breeze, para que pueda enviar su informacion, 
+
+video 231: Validacion del formulario, en el archivo del componente de "PostularVacante.php", y lo metemos dentro de un formulario dentro va asi <form wire:submit.prevent='postularme'></form> en caso que haya error con "cv" se pone el @error('cv') @enderror, y dentro un error de mostrar-alerta de livewire un componente, despues en "PostularVacante.php"
+
+video 232: Almacenando CV u Hoja de vida: en "CrearVacante.php", copiamos la parte de la imagen y donde lo guarda, hacemos la prueba para enviar dicha imagen y lo envia en este caso a esta ruta "storage/app/livewire-tmp/(PDF)
+
+video 233: Crear la relacion en el modelo de candidatos y de vacantes, en "PostularVacante.php", se declara el evento de "mount" pasandole el modelo de "Vacante $vacante" y con dd($vacante); para ver si muestra los datos, si no, nos vamos al componente de "mostrar-vacante.blade.php" y le pasamos la referencia de Vacante al componente de "postular-vacante" asi :vacante="$vacante" y recargamos en el dd ya deberia de mostrar los atributos llenos, y dentro de "mount" declaramos los public $vacante y luego dentro del mount declaramos el campo de $vacante hacia la vista asi $this->vacante = $vacante, para los candidatos, hacemos una relacion en el modelo de "Vacantes" donde muchos candiadatos aplican hacia 1 vacante asi "return $this->hasMany(Candidato::class);" en "PostularVacante.php"
+ponemos el "user_id", y el "cv" del usuario que postula a dicha vacante, en el modelo hay que declarar quien usa la vacante con protected $fillable =[  'user_id', 'cv', 'vacante_id' ]; (si da error de validacion, poner mimes)
+
+video 234: Mostrar un mensaje flash de que la Info se envio exitosamente, en "postularVacante.php" ponemos un mensaje y retornamos hacia atras, en "postular-vacante.blade.php", ponemos una condicion de que si el mensaje se envio, si existe la session, envia el mensaje, si lo envio se pone un else dentro el formulario para que lo oculte porque ya envio su informacion 1 sola vez
+
+video 235: Laravel y notificaciones, permiten saber cuando un evento ocurre en tu aplicacion, ejemplo una nueva venta, nuevo suscriptor, mensaje de contacto son ejemplos de eventos, que se pueden añadir en las notificaciones, laravel soporta notificaciones de en la pagina web, Emaul o SMS(Paga), se crea asi "php artisan make:notification Notification"
+
+video 236: Creando la notificacion y ejecutando la migracion, asi se crea "php artisan make:notification Notification" en "app/notifications/nuevoCandidato.php" donde creamos una funcion "toDatabase", donde se almacenaran las notificaciones en la base de datos, despues creamos "php artisan notifications:table", despues "php artisan migrate"
+
+video 237: Notificando al reclutador por cada vacante, en "Vacante.php", creamos una relacion mas llamado asi "public function reclutador(){}" dentro hacemos una relacion de 1 a 1 donde 1 vacante tiene 1 usuario asi "return  $this->belongsTo(User::class, 'user_id'); // especificamos que campo 'user_id' por salirnos de las convenciones de laravel",en "postularVacante.php" creamos el cuerpo de la notificacion, donde se le pasa de parametros el id de vacante, su nombre y el Id de usuario autenticado
+
+video 238: Creando el controlador para ver las notificaciones, para poder verlo se hace asi "php artisan make:controller NotificacionController --invokable" donde solo tiene 1 funcion el poder acceder a ellas, en "web.php", creamos una ruta para poder mostrar las notificaciones
+
+video 239: Listando las notificaciones, en "notificacionController.php" ponemos un return view('notificaciones.index'); para mostrar la vista, donde creamos el folder de "views/notificaciones/index.blade.php", donde agarramos el cuerpo de manera similar al de "Create.blade.php", donde cambiamos su panel de notificaciones, cuando en "postular-vacante.php", la funcion cuando añadas a reclutador, "laravel sabe a quien va notificar en el constructor de "NotificacionController.php" pasamos el index.blade.php con las variables que mostraremos a la vista y le damos estilos para que se vea bien la estructura
+
+video 240: Marcar las notificaciones como vistas en "NotificacionController.php" poniendo despues de obtener las notificaciones, esto: auth()->user()->unreadNotifications->markAsRead();, despues nos vamos en la parte de notificaciones, recargamos 2 veces la pagina y desaparecen, debido a que ya fue vista, pero el registro de las notificaciones sigue existiendo
+
+video 241: Mostrando la cantidad de notificaciones en la parte superior de la pagina, en "navigation.blade.php" hacemos una condicion de si el usuario autenticado es el "reclutador" para poder recibir las notificaciones, en "web.php" le ponemos notificaciones para que desde ahi se puede acceder con el "->name" y en "navigation.blade.php", ponemos la parte de las notificaciones, dandole estilos con tailwind para que parezca una notificacion y checar que muestre las notificaciones en moviles
+
+video 242: Mostrando la cantidad de notificaciones en moviles, en "navigation.blade.php" en la parte responsiva, copiamos el contenedor de las notificaciones y los pegamos en el lado responsivo, de ahi se adapta 
+se pone la directiva @chooice para que evalue la cantidad de notificaciones dependiendo de cuantos haya, si hay 1, es en singular si hay mas de 1, sera en plural
+
+video 243: Que es un Middleware y como funciona, en "localhost:8000/notifications, da un error de acceso, eso es debido a los middlewares que no permiten el acceso por temas de seguridad, en "web.php" se pone asi la ruta de las notificaciones, "Route::get('/notificaciones', NotificacionController::class)->middleware('auth', 'verified')->name('notificaciones');", tambien creamos nuestro propio middleware, ejecutamos asi: "php artisan make:middleware RolUsuario", se almacenan en "app/middleware/RolUsuario.php", hay que registrarlo en "Kernel.php" y lo declaras dentro de "middlewareAliases" asi 'rol.reclutador' => RolUsuario::class Y
+en "web.php", en la ruta de las notificaciones, ponemos dentro el middleware "Route::get('/notificaciones', NotificacionController::class)->middleware('auth', 'verified', 'rol.reclutador')->name('notificaciones');" y nos vamos en notificaciones, deberia de mostrarse el nombre, para prevenir el acceso a los desarrolladores hacia el panel del reclutador, en "RolUsuario.php", se declara el $request()->user()->rol, es el que trae los valores dentro de la variable y muestra el rol en el que estes, le ponemos a la ruta / ->name('home')
+
+video 244: Ocultando las notificaciones para los devs y evitando a que accedan a las notificaciones, en "navigation.blade.php" se sistituye el rol y se pone este @can('create', App\Models\Vacante::class), para que solo Reclutadores puedan acceder al igual los botones de "crear vacantes", "mis vacantes" solo sea vista por el Reclutador, para solucionar el error que manda al dashboard y muestra un policy de acceso denegado, en "Auth.php" nos vamos hacia el "AutehticateSessionController.php" y en el HOME dice /dashboard, para solucionarlo, le pasamos el middleware en "web.php" de "rol.reclutador" para que solo el reclutador pueda acceder a el panel de control "dashboard",
+si quieres hacer mas if para autorizaciones de middleware, es recomendable hacer varios middleware para que sea facil de mantener,
+
+video 245: Creando el Controller, Ruta y vista Para mostrar los candidatos, en "mostrar-vacantes.blade.php" hay un boton de candidatos, tambien en el modelo de "Vacantes.php", donde hay una funcion de candidatos, que tiene una relacion $this->hasMany(Candidato::class), en "web.php", creamos una ruta para los candidatos, asu vez en el "CandidatosController.php" probamos si funciona la ruta de candidatos, y le declaramos la ruta en "web.php", donde se pasa la ruta de los candidatos, "en mostrar-vacantes.blade.php", se le pasa dentro el "route('candidatos.index') al tocar debe mostrar un mensaje de ejemplo, si lo muestra, creamos la vista para filtrar a los candidatos hacia la vacante
+en "resources/views/candidatos/index.blade.php, copiamos la base de "create.blade.php",le quitamos el componente y le pasamos en "CandidatosController" un "Return view('candidatos.index',[
+    'vacante' => $vacante
+])" y en la vista se de "index.blade.php" de Candidatos, se modifica, para luego listarlo
+
+video 246: Listando los candidatos, se hace un @forelse para pasar los candidatos gracias a la relacion de "Candidatos" del modelo "Vacantes.blade.php", se muestra pero todos los datos en la vista, para ello nos vamos al modelo de "Candidatos.php", donde declaramos el "user" y dentro la llave foranea return $this->belongsTo(User::class); , para que se muestre el nombre del usuario, y en la vista de "index.blade.php ya poniendo asi {{ $candidato->user}} y el resto de datos de cuando lo publico, correo, en "mostrar-vacante.blade.php" en el boton para saber cuantos candidatos hay, se le pasa {{ $vacante->candidatos->count()}} para ver en el boton de cuantos candidatos tiene en el boton, 
+en el "index.blade.php" de notificaciones, se quita, solo para mostrarlo, nos vamos a la tabla de "notificaciones" en la base de datos, borramos el contenido de "read_at" para que se muestre de nuevo, si lo abres, se quita y se pone de nuevo el contenido dentro de "read_at" para ver una mejor vista de como visualizar los candidatos, estos traen un boton que dice "Ver candidato" en el "index.blade.php" de "notificaciones", se declara la ruta asi en el href , borramos de nuevo el contenido de "read_at" para ver las notificaciones, oprimimos "Ver candidato" en la notificacion, deberia de mostrar la vista de los candidatos,  para mostrar lo mas nuevo, en "Vacante.php" en la funcion de "candidatos", le pasamos un ->orderBy('created_at', 'DESC');
+
+video 247: Creando la pagina principal, creamos un "php artisan make:controller HomeController --invokable", nos vamos a "HomeController" le ponemos un mensaje con "dd", en "web.php", cambiamos la ruta principal de "/" para pasarle el controlador de "HomeControlller" donde este se hace un return view('home.index');, este se crea dentro de "views/home/index.blade.php" en el enlace https://gist.github.com/codigoconjuan/57985871b1f16ae68952d714843ae2e1#file-index-blade-php-L1 donde nos da un layout para el home principal de la aplicacion, se da un error de header, nos vamos a "app.blade.php", se borra la parte del header "Page Heading" se le pone una condicion de que si existe la pagina de header que es este, @if (isset($header)) (contenido del header) @endif,
+para que muestre el contenido principal, despues creamos un componente de livewire para los input de las vacantes asi, "php artisan make:livewire HomeVacantes", en el "home/index.blade.php", se declara el componente de "HomeVacantes" asi: <livewire:home-vacantes />
+
+video 248: Mostrando todas las vacantes disponibles, en "HomeVacantes.php" se consulta a la base de datos las vacantes que se tienen actualmente y retornamos la variable hacia la vista, en la vista hacemos un @forelse para mostrar los datos de las vacantes que se tenga en la base de datos, para luego mostrarlo pasandole $vacante->titulo, para acceder al contenido con pasarle el "vacantes.show" y luego el $vacante->id para acceder al contenido
+
+video 249: Primeros pasos Creando un buscador, nos vamos hacia "home-vacantes.blade.php" y creamos un "php artisan make:livewire FiltrarVacantes" nos vamos a "FiltrarVacantes.php" llamamos el modelo de Salario y de Categoria y lo retornamos hacia la vista, para la vista de "filtrar-vacantes.blade.php, pegamos el codigo de este enlace "https://gist.github.com/codigoconjuan/42f5b85631bb749907ed12860d35c38e", lo pegamos dentro el contenido, nos vamos hacia "form-vacante.blade.php", donde declaramos el componente de livewire que es este: <livewire:filtrar-vacantes /> donde se hace el filtrado de las vacantes, EN "FiltrarVacantes.php" se declaran los atributos de public, $termino, $categoria, $salario, para recoger los valores que ingrese el usuario hacia la vista,
+donde se hace un "wire:model" hacia los input donde metera los datos el usuario, para checar la comunicacion, en "network", al seleccionar o meter datos hacia el input, se ve la comunicacion hacia el servidor, al oprimir el boton de "Buscar", hay que hacer una funcion en "FiltrarVacantes.php" para que lea los datos del formulario, en su vista encima del formuario, le ponemos un "wire:submit.prevent='leerDatosFormulario'", los datos de busqueda, hay que pasarlo al componente padre que es "HomeVacante.php" que es el que hace las consultas hacia la base de datos
+
+video 250: Leyendo los datos ingresados en el formulario, en "HomeVacante.php", ponemos una funcion de "buscar", pasandole los parametros de $termino, $categoria, $salario, en "HomeVacantes.php" se pone un mensaje en "dd" que dice "desde el padre", nos vamos hacia "FiltrarVacantes.php", donde se declara dentro de la funcion de "leerDatosFormulario" para comunicarse con el padre asi, $this->emit('buscar'); // donde buscar es la funcion de "HomeVacantes.php" se protege "buscar" asi "protected $listeners = ['terminosBusqueda' => 'buscar'];" y en fultrar vacantes, se declara el alias asi "$this->emit('terminosBusqueda');" al oprimir el boton, debe mandar el mensaje de la ruta padre "HomeVacantes" ya que el "filtrarVacantes.php" lo manda a llamar con el alias, se le pasan los parametros de $termino, $categoria, $salario, para que se muestren los resultados hacia la vista
+y los parametros se le pasan asi para mostrar a la vista: "$this->emit('terminosBusqueda', $this->termino, $this->categoria, $this->salario);" en la funcion de "buscar" se declara asi : "$this->termino = $termino;" si pasamos el dd($this->termino); si lo pasamos a la funcion  de "render", da error para ello se declara los public $termino, $categoria, $salario y se declaran el resto de "$this->categoria = $categoria;" "$this->salario = $salario;" en la funcion de "Buscar"
+
+video 251: filtrando vacantes con Eloquent en "HomeVacantes.php" dentro de la funcion de "render", comentamos el "$vacantes = Vacante::all();" y ponemos "$vacantes = Vacante::when($this->termino, function($query){ $query->where('titulo', 'LIKE', "%" . $this->termino . "%");})->paginate(2);" que es el filtro de busqueda que es mediante una consulta de base de datos
+
+video 252: Finalizando el buscador, darle funcion a Categoria y al salario en "HomeVacantes.php" ponemos la busqueda de "categoria" con "categoria_id", el de "salario" con "salario_id" en "home-vacantes.blade.php" donde en la vista de las vacantes, le pasamos la categoria asi $vacante->categoria->categoria y de manera similar con el salario, en "HomeVacantes.php" se le pone otra consulta de que busque el titulo por la empresa de que si no lo encuentra por el titulo de la vacante, se vaya a la segunda consulta para que busque con el titulo de la empresa gracias al orWhere
+
+
+
+
+
+
+
+
+
+CTRL + W para cerrar archivos 1 por o escogiendo cual cerrar
+"php artisan make:model --migration --controller Comentario"
+
+para reiniciar la cache de los valores de la vista para los componentes 
+Se hace un "php artisan view:clear" para limpiar la cache de la vista
+
